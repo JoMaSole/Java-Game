@@ -50,22 +50,12 @@ public class GamePanel extends JPanel implements Runnable{
 	@Override
 	public void run() {
 		
-		double drawInterval = 1000000000/FPS; //1seg
+		/*double drawInterval = 1000000000/FPS; //1seg
 		double nextDrawTime = System.nanoTime() + drawInterval;
-		
-		
 		//gameLoop
 		while (gameThread != null) {
-			
-			
-			//1 UPDATE: cargar informacion de las posiciones del pj
-			update();
-			
-			//2 DRAW: dibujar la pantalla con la nueva posicion del pj
-			repaint();
-			
-		
-			
+			update();//1 UPDATE: cargar informacion de las posiciones del pj
+			repaint(); //2 DRAW: dibujar la pantalla con la nueva posicion del pj
 				try {
 					double remainingTime = nextDrawTime - System.nanoTime();
 					remainingTime = remainingTime/1000000;
@@ -81,7 +71,38 @@ public class GamePanel extends JPanel implements Runnable{
 				}catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+			}*/
+		
+		double drawInterval = 1000000000/FPS; //1seg
+		double delta = 0;
+		long lastTime = System.nanoTime();
+		long currentTime;
+		long timer = 0;
+		int drawCount = 0;
+
+		//gameLoop
+		while (gameThread != null) {
+			
+			currentTime = System.nanoTime();
+			
+			delta += (currentTime - lastTime) / drawInterval;
+			timer += (currentTime - lastTime);
+			lastTime = currentTime;
+			
+			if(delta >= 1) {
+				
+				update();   
+				repaint(); 
+				delta--;
+				drawCount++;
 			}
+			
+			if(timer >= 1000000000) {
+				System.out.println("FPS:" + drawCount);
+				drawCount = 0;
+				timer = 0;
+			}
+		}
 	}
 	
 	public void update() {
