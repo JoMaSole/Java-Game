@@ -7,13 +7,15 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Player;
+
 public class GamePanel extends JPanel implements Runnable{
 	
 	// screen settings
 	final int originalTileSize = 16; //16x16
 	final int scale = 3;
 	
-	final int titleSize = originalTileSize * scale;
+	public final int titleSize = originalTileSize * scale;
 	final int maxScreenCol = 16;
 	final int maxScreenRow = 12;
 	final int screenWidth = titleSize * maxScreenCol; //768
@@ -23,8 +25,8 @@ public class GamePanel extends JPanel implements Runnable{
 	int FPS = 60;
 	
 	KeyHandler keyH = new KeyHandler();
-	Thread gameThread; 
-	//cuando inicia llama automaticamente al metodo run
+	Thread gameThread; //cuando inicia llama automaticamente al metodo run
+	Player player = new Player(this,keyH);
 	
 	//setear posicion default del pj
 	int playerX = 100;
@@ -107,16 +109,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void update() {
 		
-		if(keyH.upPressed == true) {
-			playerY -= playerSpeed;
-			//playerY = playerY - playerSpeed;
-		}else if (keyH.downPressed == true) {
-			playerY += playerSpeed;
-		}else if (keyH.leftPressed == true) {
-			playerX -= playerSpeed;
-		}else if (keyH.rightPressed == true) {
-			playerX += playerSpeed;
-		}
+		player.update();
 		
 	}
 	//con este metodo dibujamos el pj
@@ -126,8 +119,7 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		Graphics2D g2 = (Graphics2D)g;
 		
-		g2.setColor(Color.white);
-		g2.fillOval(playerX, playerY, titleSize, titleSize);
+		player.draw(g2);
 		g2.dispose();
 		
 		
