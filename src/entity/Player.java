@@ -1,5 +1,8 @@
 package entity;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+
 import main.GamePanel;
 import main.KeyHandler;
 
@@ -13,8 +16,10 @@ public class Player extends Entity{
 		this.gp = gp;
 		this.keyH = keyH;
 		
+		setDefaultValues();
+		
 	}
-	public void setDefautValues(){
+	public void setDefaultValues(){
 		
 		x = 100;
 		y = 100;
