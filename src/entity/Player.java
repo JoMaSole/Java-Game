@@ -119,7 +119,7 @@ public class Player extends Entity{
 			}
 			break;
 		}
-		g2.drawImage(image, x, y, gp.titleSize, gp.titleSize, null);
+		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
 		
 	}
 }
