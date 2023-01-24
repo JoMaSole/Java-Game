@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable{
 	TileManager tileM = new TileManager(this);
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread; //cuando inicia llama automaticamente al metodo run
+	public CollisionChecker cChecker = new CollisionChecker(this);
 	public Player player = new Player(this,keyH);
 	
 	//setear posicion default del pj

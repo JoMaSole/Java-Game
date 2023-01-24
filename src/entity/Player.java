@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
+import java.awt.Rectangle;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
@@ -25,6 +25,8 @@ public class Player extends Entity{
 
 		screenX = gp.screenWidth/2;
 		screenY = gp.screenHeight/2;
+
+		solidArea = new Rectangle(8,16,32,32); //parte del personaje que colisiona
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -76,6 +78,8 @@ public class Player extends Entity{
 			worldX += speed;
 		}
 		
+		collisionOn = false;
+		gp.cChecker.checkTile(this);
 			spriteCounter ++;
 			
 			if(spriteCounter > 12){
