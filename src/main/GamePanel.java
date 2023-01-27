@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import entity.Player;
 import tile.TileManager;
+import objetos.SuperObjetos;
 
 public class GamePanel extends JPanel implements Runnable{
 	
@@ -35,7 +36,10 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread; //cuando inicia llama automaticamente al metodo run
 	public CollisionChecker cChecker = new CollisionChecker(this);
+	public AssetSetter aSetter = new AssetSetter(this);
 	public Player player = new Player(this,keyH);
+	public SuperObjetos obj[] = new SuperObjetos[10];
+
 	
 	//setear posicion default del pj
 	int playerX = 100;
@@ -52,6 +56,11 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setFocusable(true);
 	}
 	
+	public void setupGame(){
+		
+		aSetter.setObjeto();
+	}
+
 	public void startGameThread() {
 		
 		gameThread = new Thread(this);
@@ -130,7 +139,15 @@ public class GamePanel extends JPanel implements Runnable{
 		Graphics2D g2 = (Graphics2D)g;
 		
 		tileM.draw(g2); //primero se dibuja el fondo y despues el pj
+
+		for(int i = 0; i < obj.length; i++){
+			if(obj[i] != null){
+				obj[i].draw(g2, this);
+			}
+		}
+
 		player.draw(g2);
+
 		g2.dispose();
 		
 		
