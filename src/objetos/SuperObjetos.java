@@ -1,7 +1,7 @@
 package objetos;
 
 import java.awt.image.BufferedImage;
-
+import java.awt.Rectangle;
 import main.GamePanel;
 import java.awt.Graphics2D;
 
@@ -11,6 +11,9 @@ public class SuperObjetos {
     public String name;
     public boolean collision = false;
     public int  worldX, worldY;
+    public Rectangle solidArea = new Rectangle(0,0,48,48);
+    public int solidAreaDefaultX = 0;
+    public int solidAreaDefaultY = 0;
     
     public void draw(Graphics2D g2, GamePanel gp){
 

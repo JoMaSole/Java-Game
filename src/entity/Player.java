@@ -27,6 +27,8 @@ public class Player extends Entity {
 		screenY = gp.screenHeight / 2;
 
 		solidArea = new Rectangle(8, 16, 32, 32); // parte del personaje que colisiona
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
 
 		setDefaultValues();
 		getPlayerImage();
@@ -83,6 +85,9 @@ public class Player extends Entity {
 			// check tile collision
 			collisionOn = false;
 			gp.cChecker.checkTile(this);
+
+			//check collision objeto
+			int objIndex = gp.cChecker.checkObjeto(this, true);
 
 			// si la collision es falsa el jugador no se mueve
 
